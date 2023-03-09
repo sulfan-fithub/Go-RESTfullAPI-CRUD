@@ -1,0 +1,108 @@
+openapi: 3.0.2
+info:
+  title: Category API
+  version: 1.0.0
+servers:
+  - url: http://localhost:3000
+paths:
+  /categories:
+    get:
+      summary: Get all categories
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Category'
+    post:
+      summary: Create a new category
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewCategory'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Category'
+  /categories/{categoryId}:
+    get:
+      summary: Get a single category by ID
+      parameters:
+        - name: categoryId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Category'
+    put:
+      summary: Update a category by ID
+      parameters:
+        - name: categoryId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateCategory'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Category'
+    delete:
+      summary: Delete a category by ID
+      parameters:
+        - name: categoryId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: No Content
+components:
+  schemas:
+    Category:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier for the category
+        name:
+          type: string
+          description: Name of the category
+    NewCategory:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the category
+    UpdateCategory:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the category to update
+      required:
+        - name
