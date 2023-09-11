@@ -1,4 +1,3 @@
-Creating a README.md file for your GitHub project is a great way to provide information and instructions for potential users and contributors. Here's a template you can use for your Go RESTful API CRUD project:
 
 ```markdown
 # Go RESTful API CRUD
